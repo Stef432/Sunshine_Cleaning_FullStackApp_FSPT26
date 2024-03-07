@@ -6,9 +6,11 @@ import "./App.css";
 function App() {
   const [availability, setAvailability] = useState(0);
 
+  useEffect();//to display the list at first load
+
   async function addAvailability(id) {
     let options = {
-      method: "GET";
+      method: "POST";
       body: {name:, last-name:, email:, am:, pm:,}
     };
     try {
