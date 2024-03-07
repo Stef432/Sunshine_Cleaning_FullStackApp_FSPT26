@@ -1,15 +1,16 @@
-var express = require("express");
-var router = express.Router();
+--
+-- Drop Tables
+--
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.send({ title: "Express" });
-});
+SET foreign_key_checks = 0;
+DROP TABLE if exists cleaners;
+DROP TABLE if exists cleaner_availability;
+DROP TABLE if exists shifts;
+SET foreign_key_checks = 1;
 
-router.post("/", function(req, res, next) {
-  res.send({title:"Express"})
-})
-
+--
+-- Create Tables
+--
 CREATE TABLE `cleaners`(
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `first_name` VARCHAR(255) NOT NULL,
@@ -26,16 +27,15 @@ CREATE TABLE `cleaner_availability`(
   `days` DATE NOT NULL,
   `daytime` VARCHAR(255) NOT NULL,
   `frequency` VARCHAR(255) NOT NULL,
-  `cleaner_id` INT NOT NULL,
+  `cleaner_id` INT NOT NULL
 );
 
-CREATE TABLE `shifts` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY;
+CREATE TABLE `shifts`(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `day` DATE NOT NULL,
   `daytime` VARCHAR(255) NOT NULL,
   `frequency` VARCHAR(255) NOT NULL,
-  `shift_id` INT NOT NULL,
-)
+  `shift_id` INT NOT NULL
+);
 
 
-module.exports = router;
