@@ -24,12 +24,18 @@ CREATE TABLE `cleaners`(
 CREATE TABLE `cleaner_availability`(
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `days` DATE NOT NULL,
-  `time_range` TIME NOT NULL,
+  `daytime` VARCHAR(255) NOT NULL,
   `frequency` VARCHAR(255) NOT NULL,
   `cleaner_id` INT NOT NULL,
-  `type_of_service` VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE `shifts` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY;
+  `day` DATE NOT NULL,
+  `daytime` VARCHAR(255) NOT NULL,
+  `frequency` VARCHAR(255) NOT NULL,
+  `shift_id` INT NOT NULL,
+)
 
 
 module.exports = router;
