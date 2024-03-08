@@ -2,10 +2,10 @@ import React from "react";
 
 export default function CleanerList(props) {
   return (
-    <div>
-      props.cleaners.map(item => (
-      <div key={item.id}>
-        <div className="cleaner-list">
+    <div className="CleanerList">
+        <ul>
+        {props.cleaners.map((item) => (
+      <li key={item.id}>
           <button
             type="button"
             name="delete"
@@ -13,9 +13,11 @@ export default function CleanerList(props) {
           >
             x
           </button>
-        </div>
-      </div>
-      ))
+        </li>
+        </ul>
+
+    
+    
+        );
     </div>
-  );
 }

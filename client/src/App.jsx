@@ -10,47 +10,43 @@ function App() {
 
   async function addAvailability(id) {
     let options = {
-      method: "POST";
-      body: {name:, last-name:, email:, am:, pm:,}
+      method: "POST"
     };
     try {
-      let response = await fetch(`/api/add/${id}`, options);
-      if(response.ok) {
-        let availability = await response.json();
-        setAvailability(availability);
-      } else {
-        console.log(`Server Error: ${response.status}`)
-      } catch (err)
-    }
-  }
-
-  async function deleteAvailability(id) {
-    let options = {
-      method: "DELETE";
-    };
-    try {
-      let response = await fetch(`/api/add/${id}`, options);
+      let response = await fetch(`/cleaners/add/${id}`, options);
       if(response.ok) {
         let availability = await response.json();
         setAvailability(availability);
       } else {
         console.log(`Server Error: ${response.status}`);
-      } catch (err) {
-        console.log(`Server Error: ${err.message}`);
-      }
+    } }
+    catch (err) {
+      console.log(`Server Error: ${err.message}`);
     }
   }
 
+  async function deleteAvailability(id) {
+    let options = {
+      method: "DELETE"
+    };
+    try {
+      let response = await fetch(`/cleaners/add/${id}`, options);
+      if(response.ok) {
+        let availability = await response.json();
+        setAvailability(availability);
+      } else {
+        console.log(`Server Error: ${response.status}`);
+      } }
+      catch (err) {
+        console.log(`Server Error: ${err.message}`);
+      }
+    }}
   
   
   return (
     <div className="App">
-      
-      <navbar></navbar>
-
-        <img src={Sunshine} className="logo" alt="Sunshine-logo" />
-        <NewCleanerForm />
-      </div>
+      <img src={Sunshine} className="logo" alt="Sunshine-logo" />
+      <NewCleanerForm />
       <h1>Hi cleaner.name!</h1>
       <h2>Enter your availability</h2>
       <form>
@@ -64,19 +60,10 @@ function App() {
           <option value="saturday">Saturday</option>
         </select>
       </form>
-      <div className="card">
         <button
-          onClick={() => setAvailability((availability) => availability + 1)}
-        >
+          onClick={e => setAvailability(e)}>
           Add to Calendar
         </button>
-        <p>Take a look at your Calendar</p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  );
-}
-
+)}
 export default App;
