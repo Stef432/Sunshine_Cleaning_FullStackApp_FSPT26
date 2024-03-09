@@ -16,12 +16,12 @@ function App() {
   //useEffect(); //"fetch" from dB to display some initial cleaners when loading:
 
   //this is how to add new info in cleaners list
-  function handleClick(e) {
+  /*  function handleClick(e) {
     e.prevent.default();
     let newCleaner = e.NewCleanerForm.value;
     alert("Cleaner added to the team!");
     setCleaners(...cleaners, newCleaner);
-  }
+  } */
 
   //this is adding new info in dB
   async function addAvailability(id) {
@@ -63,21 +63,10 @@ function App() {
   return (
     <div className="App">
       <img src={Sunshine} className="logo" alt="Sunshine-logo" size={80} />
-      <NewCleanerForm handleClick={handleClick} />
+
       <h1>Hi cleaner.name!</h1>
       <h2>Enter your availability</h2>
-      <form>
-        <label htmlFor="days">Days:</label>
-        <select id="days" name="days">
-          <option value="monday">Monday</option>
-          <option value="tuesday">Tuedsay</option>
-          <option value="wednesday">Wednesday</option>
-          <option value="thursday">Thursday</option>
-          <option value="friday">Friday</option>
-          <option value="saturday">Saturday</option>
-        </select>
-      </form>
-      <button onClick={(e) => setAvailability(e)}>Add to Calendar</button>
+      <NewCleanerForm />
     </div>
   );
 }
