@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 
-export default function NewCleanerForm({}) {
+export default function NewCleanerForm({ addCleaner }) {
   const firstNameRef = useRef();
 
   function handleSubmit(e) {
-    e.prevent.default();
-    console.log(firstNameRef.current.value);
+    e.preventDefault();
+    addCleaner(firstNameRef.current.value);
   }
 
   return (
