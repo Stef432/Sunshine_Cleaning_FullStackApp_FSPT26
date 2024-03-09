@@ -5,10 +5,6 @@ import "./App.css";
 
 function App() {
   //set the initial state of your main information variables:
-
-  function addCleaner(cleaner) {
-    setCleaner({ name: cleaner });
-  }
   const [cleaner, setCleaner] = useState({
     name: "",
     lastname: "",
@@ -16,6 +12,12 @@ function App() {
     days: "",
     time: "",
   });
+  // let isName = cleaner.name;
+
+  function addCleaner({ cleaner }) {
+    console.log({ cleaner });
+    setCleaner(cleaner);
+  }
 
   //useEffect(); //"fetch" from dB to display some initial cleaners when loading:
 
@@ -68,7 +70,7 @@ function App() {
     <div className="App">
       <img src={Sunshine} className="logo" alt="Sunshine-logo" size={80} />
 
-      <h1>Hi cleaner.name!</h1>
+      <h1>Hi {cleaner.name}!</h1>
       <h2>Enter your availability</h2>
       <NewCleanerForm addCleaner={addCleaner} />
     </div>
