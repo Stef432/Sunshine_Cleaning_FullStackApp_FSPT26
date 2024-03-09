@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 /* GET users listing. */
-router.get("/", function (req, res) {
+router.get("/api", function (req, res) {
   db("SELECT * FROM cleaners ORDER BY id ASC;")
     .then((results) => {
       res.send(results.data);

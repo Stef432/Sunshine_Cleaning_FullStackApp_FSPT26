@@ -30,13 +30,11 @@ h2 {
   border-radius: 40px;
 }
 
-#logo {
-  height: 100px;
+.logo {
+  align-content: center;
+  height: 300px;
   display: block;
   margin: auto;
-}
-
-#card {
 }
 
 .days label {
