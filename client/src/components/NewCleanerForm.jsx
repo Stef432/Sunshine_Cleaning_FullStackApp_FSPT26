@@ -21,7 +21,7 @@ export default function NewCleanerForm({ addCleaner }) {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="cleaner-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" ref={firstNameRef} />

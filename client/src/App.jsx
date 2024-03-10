@@ -12,14 +12,13 @@ function App() {
     days: "",
     time: "",
   });
+
   // let isName = cleaner.name;
 
   function addCleaner({ cleaner }) {
     console.log({ cleaner });
     setCleaner(cleaner);
   }
-
-  //useEffect(); //"fetch" from dB to display some initial cleaners when loading:
 
   //this is how to add new info in cleaners list
   /*  function handleClick(e) {
@@ -35,10 +34,10 @@ function App() {
       method: "POST",
     };
     try {
-      let response = await fetch(`/cleaners/add/${id}`, options);
+      let response = await fetch(`api/cleaners/add/${id}`, options);
       if (response.ok) {
-        let availability = await response.json();
-        setAvailability(availability);
+        let cleaner = await response.json();
+        setCleaner(cleaner);
       } else {
         console.log(`Server Error: ${response.status}`);
       }

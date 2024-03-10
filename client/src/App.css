@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(57, 169, 219);
+  background-color: rgb(252, 250, 248);
   font-family: Rubik, Arial;
 }
 
@@ -9,11 +9,8 @@ form {
   height: 80%;
   overflow: auto;
 }
-
-form hr {
-  width: 15%;
+.cleaner-form {
 }
-
 h1 {
   text-align: center;
 }
@@ -39,4 +36,8 @@ h2 {
 
 .days label {
   margin-right: 25px;
+}
+button {
+  color: #3992ff;
+  font-weight: 500;
 }
