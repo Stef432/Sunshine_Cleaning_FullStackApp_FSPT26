@@ -16,7 +16,7 @@ export default function NewCleanerForm({ addCleaner }) {
       time: dayTimeInputRef.current.value,
       day: dayInputRef.current.value,
     };
-    addCleaner({ cleaner });
+    addCleaner(cleaner);
   }
 
   return (

@@ -2,31 +2,24 @@ import { useState } from "react";
 import Sunshine from "./Sunshine.jpeg";
 import NewCleanerForm from "./components/NewCleanerForm";
 import "./App.css";
+import CleanerList from "./components/CleanerList";
 
 function App() {
   //set the initial state of your main information variables:
   const [cleaner, setCleaner] = useState({
-    name: "",
-    lastname: "",
-    email: "",
-    days: "",
-    time: "",
+    id: 0,
+    name: "stefa",
+    lastname: "munari",
+    email: "stefani@munari.com",
+    days: "mondays",
+    time: "afternoons",
   });
 
-  // let isName = cleaner.name;
-
-  function addCleaner({ cleaner }) {
-    console.log({ cleaner });
+  async function addCleaner(id) {
+    console.log(cleaner);
     setCleaner(cleaner);
+    addAvailability(cleaner.id);
   }
-
-  //this is how to add new info in cleaners list
-  /*  function handleClick(e) {
-    e.prevent.default();
-    let newCleaner = e.NewCleanerForm.value;
-    alert("Cleaner added to the team!");
-    setCleaners(...cleaners, newCleaner);
-  } */
 
   //this is adding new info in dB
   async function addAvailability(id) {
