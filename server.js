@@ -16,10 +16,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, "public")));
 
-//app.use("/", indexRouter);
-app.listen(port, () => {
+//defining beginning of end point
+app.use("/api", usersRouter);
+/* app.listen(port, () => {
   console.log(`Sunshine App listening at localhost: ${port}`);
-});
+}); */
 const userData = [{ id: 1, name: "stef", age: 36 }];
 
 app.get("/cleaners", (req, res) => {
@@ -44,4 +45,5 @@ app.post("/cleaners", (req, res) => {
   //send some response "New Cleaner Added!"
   res.send({ message: "user added" });
 });
+
 module.exports = app;

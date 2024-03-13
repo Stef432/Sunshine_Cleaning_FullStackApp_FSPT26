@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Sunshine from "./Sunshine.jpeg";
 import NewCleanerForm from "./components/NewCleanerForm";
 import "./App.css";
@@ -6,28 +6,34 @@ import CleanerList from "./components/CleanerList";
 
 function App() {
   //set the initial state of your main information variables:
-  const [cleaner, setCleaner] = useState({
-    id: 0,
-    name: "stefa",
-    lastname: "munari",
-    email: "stefani@munari.com",
-    days: "mondays",
-    time: "afternoons",
-  });
+  const [cleaner, setCleaner] = useState([
+    {
+      id: 0,
+      name: "stefa",
+      lastname: "munari",
+      email: "stefani@munari.com",
+      days: "mondays",
+      time: "afternoons",
+    },
+  ]);
 
-  async function addCleaner(id) {
-    console.log(cleaner);
-    setCleaner(cleaner);
-    addAvailability(cleaner.id);
-  }
+  /* //async function addCleaner(id) {
+
+    console.log(id);
+    //setCleaner(id);
+  } */
 
   //this is adding new info in dB
-  async function addAvailability(id) {
+  async function addCleaner(cleaner) {
     let options = {
       method: "POST",
+      body: JSON.stringify(cleaner),
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
     try {
-      let response = await fetch(`api/cleaners/add/${id}`, options);
+      let response = await fetch(`api/cleaners/add`, options);
       if (response.ok) {
         let cleaner = await response.json();
         setCleaner(cleaner);
@@ -65,6 +71,7 @@ function App() {
       <h1>Hi {cleaner.name}!</h1>
       <h2>Enter your availability</h2>
       <NewCleanerForm addCleaner={addCleaner} />
+      <CleanerList cleaner={cleaner} />
     </div>
   );
 }
