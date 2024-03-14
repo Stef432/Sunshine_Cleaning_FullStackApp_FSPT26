@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CleanerList({ cleaner }) {
+export default function CleanerList({ cleaner, removeCleaner }) {
   return (
     <div className="CleanerList">
       <ul>
@@ -9,7 +9,7 @@ export default function CleanerList({ cleaner }) {
             <button
               type="button"
               name="delete"
-              onClick={(e) => props.deleteCleaner(id)}
+              onClick={(e) => props.removeCleaner(id)}
             >
               x
             </button>

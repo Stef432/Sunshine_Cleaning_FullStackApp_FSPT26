@@ -5,25 +5,8 @@ import "./App.css";
 import CleanerList from "./components/CleanerList";
 
 function App() {
-  //set the initial state of your main information variables:
-  const [cleaner, setCleaner] = useState([
-    {
-      id: 0,
-      name: "stefa",
-      lastname: "munari",
-      email: "stefani@munari.com",
-      days: "mondays",
-      time: "afternoons",
-    },
-  ]);
+  let [cleaner, setCleaner] = useState([]);
 
-  /* //async function addCleaner(id) {
-
-    console.log(id);
-    //setCleaner(id);
-  } */
-
-  //this is adding new info in dB
   async function addCleaner(cleaner) {
     let options = {
       method: "POST",
@@ -46,16 +29,19 @@ function App() {
   }
 
   //this is deleting existing info in dB
-
-  async function deleteAvailability(id) {
+  async function removeCleaner(id) {
     let options = {
       method: "DELETE",
+      body: JSON.stringify(cleaner),
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
     try {
-      let response = await fetch(`/cleaners/add/${id}`, options);
+      let response = await fetch(`/cleaners/${id}`, options);
       if (response.ok) {
-        let availability = await response.json();
-        setAvailability(availability);
+        let cleaner = await response.json();
+        removeCleaner(cleaner);
       } else {
         console.log(`Server Error: ${response.status}`);
       }
@@ -68,7 +54,7 @@ function App() {
     <div className="App">
       <img src={Sunshine} className="logo" alt="Sunshine-logo" size={80} />
 
-      <h1>Hi {cleaner.name}!</h1>
+      <h1>Hi {cleaner.cleaner}!</h1>
       <h2>Enter your availability</h2>
       <NewCleanerForm addCleaner={addCleaner} />
       <CleanerList cleaner={cleaner} />

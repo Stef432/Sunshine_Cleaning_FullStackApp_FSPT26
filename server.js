@@ -21,7 +21,7 @@ app.use("/api", usersRouter);
 /* app.listen(port, () => {
   console.log(`Sunshine App listening at localhost: ${port}`);
 }); */
-const userData = [{ id: 1, name: "stef", age: 36 }];
+//const userData = [{ id: 1, name: "stef", age: 36 }];
 
 app.get("/cleaners", (req, res) => {
   res.send({ data: userData });
