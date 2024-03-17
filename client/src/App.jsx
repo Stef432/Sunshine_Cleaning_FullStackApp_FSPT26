@@ -1,63 +1,53 @@
 import React, { useState } from "react";
 import Sunshine from "./Sunshine.jpeg";
-import NewCleanerForm from "./components/NewCleanerForm";
+import AdminView from "./components/AdminView";
 import "./App.css";
-import CleanerList from "./components/CleanerList";
+import UserView from "./components/UserView";
 
 function App() {
-  let [cleaner, setCleaner] = useState([]);
+  const [cleaner, setCleaner] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(true);
 
-  async function addCleaner(cleaner) {
-    let options = {
-      method: "POST",
-      body: JSON.stringify(cleaner),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    try {
-      let response = await fetch(`api/cleaners/add`, options);
-      if (response.ok) {
-        let cleaner = await response.json();
-        setCleaner(cleaner);
-      } else {
-        console.log(`Server Error: ${response.status}`);
-      }
-    } catch (err) {
-      console.log(`Server Error: ${err.message}`);
-    }
+  function changeViews() {
+    setIsAdmin((admin) => !admin);
   }
 
-  //this is deleting existing info in dB
-  async function removeCleaner(id) {
-    let options = {
-      method: "DELETE",
-      body: JSON.stringify(cleaner),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    try {
-      let response = await fetch(`/cleaners/${id}`, options);
-      if (response.ok) {
-        let cleaner = await response.json();
-        removeCleaner(cleaner);
-      } else {
-        console.log(`Server Error: ${response.status}`);
-      }
-    } catch (err) {
-      console.log(`Server Error: ${err.message}`);
+  /* handleChange(e) {
+    e.preventDefault();
+    const searchInputName = {
+      cleaner: 
+      //cleaner :searchInputNameRef.current.value
     }
-  }
+    
+  } */
 
   return (
     <div className="App">
       <img src={Sunshine} className="logo" alt="Sunshine-logo" size={80} />
 
-      <h1>Hi {cleaner.cleaner}!</h1>
-      <h2>Enter your availability</h2>
-      <NewCleanerForm addCleaner={addCleaner} />
-      <CleanerList cleaner={cleaner} />
+      <h1>Hi there!</h1>
+
+      {isAdmin ? (
+        <UserView cleaner={cleaner} />
+      ) : (
+        <AdminView setCleaner={setCleaner} cleaner={cleaner} />
+      )}
+      <button type="button" onClick={changeViews}>
+        {isAdmin ? "Add a cleaner" : "Back to User View"}{" "}
+      </button>
+
+      <form className="d-flex me-3" /* onSubmit={handleSubmit} */>
+        <input
+          className="form-control me-2"
+          type="search"
+          placeholder="Search"
+          label="Search"
+          /* handleChange={handleChange} */
+        />
+        <button className="btn btn-outline-success" type="submit">
+          Search
+        </button>
+      </form>
     </div>
   );
 }

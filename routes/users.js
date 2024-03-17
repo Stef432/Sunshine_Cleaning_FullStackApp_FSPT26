@@ -13,8 +13,8 @@ router.get("/cleaners", async (req, res) => {
 });
 
 router.get("/cleaners/:id", async (req, res) => {
-  const
-  db(`SELECT * FROM cleaners WHERE id = ${id};`)
+  const cleaner = req.params.name;
+  db(`SELECT * FROM cleaners WHERE id = ${cleaner};`)
     .then((results) => {
       res.send(results.data);
     })
@@ -24,7 +24,7 @@ router.get("/cleaners/:id", async (req, res) => {
 router.post("/cleaners/:add", async (req, res) => {
   const { first_name, last_name, email, time, day } = req.body;
   db(
-    `INSERT INTO cleaners (first_name, last_name, email, time, day) VALUES (${cleaner}, ${last_name}, ${email}, ${time}, ${day});`
+    `INSERT INTO cleaners (first_name, last_name, email, time, day) VALUES (${first_name}, ${last_name}, ${email}, ${time}, ${day});`
   )
     .then((results) => {
       res.send(results.data);
@@ -32,7 +32,7 @@ router.post("/cleaners/:add", async (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-router.delete("/cleaners/add/:id", async (req, res) => {
+router.delete("/cleaners/delete/:id", async (req, res) => {
   let cleanerId = req.params.id;
   try {
     let result = await db(

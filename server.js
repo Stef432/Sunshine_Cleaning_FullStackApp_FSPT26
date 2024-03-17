@@ -18,12 +18,13 @@ app.use(cookieParser());
 
 //defining beginning of end point
 app.use("/api", usersRouter);
+
 /* app.listen(port, () => {
   console.log(`Sunshine App listening at localhost: ${port}`);
 }); */
 //const userData = [{ id: 1, name: "stef", age: 36 }];
 
-app.get("/cleaners", (req, res) => {
+/* app.get("/cleaners", (req, res) => {
   res.send({ data: userData });
 });
 
@@ -44,6 +45,6 @@ app.post("/cleaners", (req, res) => {
   //add to new uder array
   //send some response "New Cleaner Added!"
   res.send({ message: "user added" });
-});
+}); */
 
 module.exports = app;
