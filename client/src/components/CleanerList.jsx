@@ -19,8 +19,7 @@ export default function CleanerList() {
         throw new Error("Network error.");
       }
       const cleaners = await response.json();
-      console.log(cleaners.data);
-      setCleaners(cleaners.data); // Set the fetched data to the state variable
+      setCleaners(cleaners); // Set the fetched data to the state variable
     } catch (err) {
       console.error("Server failed: ", err);
     }
@@ -28,7 +27,9 @@ export default function CleanerList() {
 
   async function removeCleaner(id) {
     try {
-      const response = await fetch(`/cleaners/${id}`, { method: "DELETE" });
+      const response = await fetch(`cleaners/delete/${id}`, {
+        method: "DELETE",
+      });
       if (response.ok) {
         let cleaner = await response.json();
         setCleaners(cleaner.filter((cleaner) => cleaner.id !== id));
@@ -40,12 +41,12 @@ export default function CleanerList() {
     }
   }
 
-  const handleDeleteCleaner = () => {
+  function handleDeleteCleaner(id) {
     const confirmDelete = window.confirm("Delete?");
     if (confirmDelete) {
-      removeCleaner(cleaners.id);
+      removeCleaner(id);
     }
-  };
+  }
   return (
     <div className="CleanerList">
       <ul>
@@ -57,7 +58,7 @@ export default function CleanerList() {
             <button
               type="button"
               name="delete"
-              onClick={handleDeleteCleaner} // Pass the cleaner id to the removeCleaner function
+              onClick={() => handleDeleteCleaner(cleaner.id)} // Pass the cleaner id to the removeCleaner function
             >
               Delete
             </button>

@@ -10,8 +10,8 @@ export default function NewCleanerForm({ addCleaner }) {
   function handleSubmit(e) {
     e.preventDefault();
     const cleaner = {
-      cleaner: firstNameRef.current.value,
-      lastName: lastNameInputRef.current.value,
+      first_name: firstNameRef.current.value,
+      last_name: lastNameInputRef.current.value,
       email: emailInputRef.current.value,
       time: dayTimeInputRef.current.value,
       day: dayInputRef.current.value,

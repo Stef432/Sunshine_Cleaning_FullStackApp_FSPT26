@@ -13,7 +13,7 @@ router.get("/cleaners", async (req, res) => {
 });
 
 router.get("/cleaners/:id", async (req, res) => {
-  const cleaner = req.params.name;
+  const cleaner = req.params.id;
   db(`SELECT * FROM cleaners WHERE id = ${cleaner};`)
     .then((results) => {
       res.send(results.data);
@@ -21,10 +21,10 @@ router.get("/cleaners/:id", async (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-router.post("/cleaners/:add", async (req, res) => {
-  const { first_name, last_name, email, time, day } = req.body;
+router.post("/cleaners/add", async (req, res) => {
+  const { first_name, last_name, email, day_time, day } = req.body;
   db(
-    `INSERT INTO cleaners (first_name, last_name, email, time, day) VALUES (${first_name}, ${last_name}, ${email}, ${time}, ${day});`
+    `INSERT INTO cleaners (first_name, last_name, email, day_time, day) VALUES ("${first_name}", "${last_name}", "${email}", "${day_time}", "${day}");`
   )
     .then((results) => {
       res.send(results.data);
@@ -33,17 +33,15 @@ router.post("/cleaners/:add", async (req, res) => {
 });
 
 router.delete("/cleaners/delete/:id", async (req, res) => {
-  let cleanerId = req.params.id;
+  let id = req.params.id;
   try {
-    let result = await db(
-      `SELECT cleaners.id FROM  cleaners WHERE id = ${cleanerId}`
-    );
-    if (result.data.length === 0) {
+    let result = await db(`SELECT * FROM  cleaners WHERE id = ${id}`);
+    if (result.length === 0) {
       res.status(400).send({ error: "item not found" });
     } else {
-      await db(`DELETE FROM cleaners WHERE id = ${cleanerId}`);
+      await db(`DELETE FROM cleaners WHERE id = ${id}`);
       (result = await db("SELECT * FROM cleaners")),
-        res.status(200).send(result.data);
+        res.status(200).send(result);
     }
   } catch (err) {
     res.status(500).send({ error: err.message });
