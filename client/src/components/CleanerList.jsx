@@ -27,7 +27,7 @@ export default function CleanerList() {
 
   async function removeCleaner(id) {
     try {
-      const response = await fetch(`cleaners/delete/${id}`, {
+      const response = await fetch(`/api/cleaners/delete/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {

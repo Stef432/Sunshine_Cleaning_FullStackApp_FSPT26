@@ -41,7 +41,7 @@ router.delete("/cleaners/delete/:id", async (req, res) => {
     } else {
       await db(`DELETE FROM cleaners WHERE id = ${id}`);
       (result = await db("SELECT * FROM cleaners")),
-        res.status(200).send(result);
+        res.status(200).send(result.data);
     }
   } catch (err) {
     res.status(500).send({ error: err.message });
