@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import "./CleanerList.css";
 export default function CleanerList() {
   const [cleaners, setCleaners] = useState([]);
 
@@ -11,6 +11,7 @@ export default function CleanerList() {
     try {
       const response = await fetch("/api/cleaners");
       if (!response.ok) {
+        console.log(cleaners);
         console.error(
           "Error fetching cleaners:",
           response.status,
@@ -19,6 +20,7 @@ export default function CleanerList() {
         throw new Error("Network error.");
       }
       const cleaners = await response.json();
+      console.log(cleaners);
       setCleaners(cleaners); // Set the fetched data to the state variable
     } catch (err) {
       console.error("Server failed: ", err);
@@ -50,20 +52,26 @@ export default function CleanerList() {
   return (
     <div className="CleanerList">
       <ul>
-        {cleaners.map((cleaner) => (
-          <li key={cleaner.id} className="cleaners-list">
-            {/* Assuming cleaner has a property id */}
-            <p>{cleaner.first_name}</p>
-            {/* Render other cleaner properties as needed */}
-            <button
-              type="button"
-              name="delete"
-              onClick={() => handleDeleteCleaner(cleaner.id)} // Pass the cleaner id to the removeCleaner function
-            >
-              Delete
-            </button>
-          </li>
-        ))}
+        <article>
+          {cleaners.map((cleaner) => (
+            <li key={cleaner.id} className="cleaners-list">
+              <article>
+                <h4>
+                  {cleaner.last_name}, {cleaner.first_name}
+                </h4>
+                <p>Available day:</p>
+                {cleaner.day} {cleaner.day_time}
+                <button
+                  type="button"
+                  name="delete"
+                  onClick={() => handleDeleteCleaner(cleaner.id)} // Pass the cleaner id to the removeCleaner function
+                >
+                  Delete
+                </button>
+              </article>
+            </li>
+          ))}
+        </article>
       </ul>
     </div>
   );

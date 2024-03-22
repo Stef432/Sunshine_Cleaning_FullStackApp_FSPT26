@@ -8,7 +8,7 @@ const logger = require("morgan");
 const usersRouter = require("./routes/users");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
